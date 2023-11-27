@@ -1,5 +1,5 @@
 - name: Expense project setup
-  hosts: all
+  hosts: localhost
   tasks:
     - name: Installing Nginx
       ansible.builtin.dnf:
