@@ -19,32 +19,31 @@ filebeat.inputs:
   # Below are the input-specific configurations.
 
   # filestream is an input for collecting log messages from files.
-  - type: filestream
+- type: filestream
 
-    # Unique ID among all inputs, an ID is required.
-    id: {{ component }}
+  # Unique ID among all inputs, an ID is required.
+  id: {{ component }}
 
-    # Change to true to enable this input configuration.
-    enabled: true
+  # Change to true to enable this input configuration.
+  enabled: true
 
-    # Paths that should be crawled and fetched. Glob based paths.
-    paths:
-      - {{ log_file }}
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - {{ log_file }}
 
-    # Exclude lines. A list of regular expressions to match. It drops the lines that are
-    # matching any regular expression from the list.
-    # Line filtering happens after the parsers pipeline. If you would like to filter lines
-    # before parsers, use include_message parser.
-    #exclude_lines: ['^DBG']
+  # Exclude lines. A list of regular expressions to match. It drops the lines that are
+  # matching any regular expression from the list.
+  # Line filtering happens after the parsers pipeline. If you would like to filter lines
+  # before parsers, use include_message parser.
+  #exclude_lines: ['^DBG']
 
-    # Include lines. A list of regular expressions to match. It exports the lines that are
-    # matching any regular expression from the list.
-    # Line filtering happens after the parsers pipeline. If you would like to filter lines
-    # before parsers, use include_message parser.
-    #include_lines: ['^ERR', '^WARN']
-
-    # Exclude files. A list of regular expressions to match. Filebeat drops the files that
-    # are matching any regular expression from the list. By default, no files are dropped.
+  # Include lines. A list of regular expressions to match. It exports the lines that are
+  # matching any regular expression from the list.
+  # Line filtering happens after the parsers pipeline. If you would like to filter lines
+  # before parsers, use include_message parser.
+  #include_lines: ['^ERR', '^WARN']
+  # Exclude files. A list of regular expressions to match. Filebeat drops the files that
+  # are matching any regular expression from the list. By default, no files are dropped.
     #prospector.scanner.exclude_files: ['.gz$']
 
     # Optional additional fields. These fields can be freely picked
@@ -150,7 +149,7 @@ output.elasticsearch:
   # ------------------------------ Logstash Output -------------------------------
 output.logstash:
   # The Logstash hosts
-hosts: ["172.31.84.195:5601"]
+  hosts: ["172.31.84.195:5044"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
