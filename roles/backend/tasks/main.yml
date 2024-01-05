@@ -1,3 +1,6 @@
+- name: Set HostName
+  ansible.builtin.shell: set-hostname {{env}}-{{component}}
+
 - name: Disable nodejs default version
   ansible.builtin.shell: dnf module disable nodejs -y
 
@@ -14,7 +17,7 @@
     src: backend.service
     dest: /etc/systemd/system/backend.service
 
-- name: Create user named expense for Application
+- name: Create Application user
   ansible.builtin.user:
     name: expense
 
@@ -25,6 +28,7 @@
   vars:
     app_dir: /app
     component: backend
+    app_user: expense
 
 - name: Download nodejs dependencies
   ansible.builtin.shell: npm install
@@ -39,6 +43,11 @@
 - name: Load the schema
   ansible.builtin.shell: mysql -h {{ lookup('amazon.aws.aws_ssm', '{{env}}.backend.DB_HOST', region='us-east-1' ) }} -u{{ lookup('amazon.aws.aws_ssm', '{{env}}.rds.username', region='us-east-1' ) }} -p{{ lookup('amazon.aws.aws_ssm', '{{env}}.rds.password', region='us-east-1' ) }} < /app/schema/backend.sql
 
+- name: Import ELK role - Filebeat
+  ansible.builtin.import_role:
+    name: elk
+    tasks_from: filebeat
+
 - name: Restart backend service
   ansible.builtin.systemd:
     name: backend
@@ -46,8 +55,8 @@
     enabled: yes
     daemon-reload: yes
 
-- name: Import ELK role - Filebeat
+- name: Import Prometheus - Node Exporter
   ansible.builtin.import_role:
-    name: elk
-    tasks_from: filebeat
+    name: prometheus
+    tasks_from: node-exporter
 
