@@ -2,7 +2,7 @@
   hosts: all
   become: yes
   vars:
-    project_name = "expense"
+    project_name: expense
   roles:
     - "{{ role_name }}"
 
