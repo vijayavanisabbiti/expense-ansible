@@ -21,7 +21,7 @@ pipeline {
                 stage('frontend') {
                     steps {
                         git branch: 'main', url: 'https://github.com/vijayavanisabbiti/expense-ansible'
-                        sh 'ansible-playbook -i ${component}.vijayavanimanju.online, expense.yml -e env=dev -e role_name=${component} -e ansible_user=centos -e ansible_password=DevOps321'
+                        sh 'ansible-playbook -i frontend.vijayavanimanju.online, expense.yml -e env=dev -e role_name=frontend -e ansible_user=centos -e ansible_password=DevOps321'
 
                     }
                 }
@@ -29,7 +29,7 @@ pipeline {
                 stage('backend') {
                     steps {
                         git branch: 'main', url: 'https://github.com/vijayavanisabbiti/expense-ansible'
-                        sh 'ansible-playbook -i ${component}.vijayavanimanju.online, expense.yml -e env=dev -e role_name=${component} -e ansible_user=centos -e ansible_password=DevOps321'
+                        sh 'ansible-playbook -i backend.vijayavanimanju.online, expense.yml -e env=dev -e role_name=backend -e ansible_user=centos -e ansible_password=DevOps321'
 
                     }
                 }
