@@ -20,7 +20,7 @@ pipelines:
                 - exec:
                     command: echo
                     arguments:
-                      "Deploying to Dev env"
+                      - "Deploying to Dev env"
                     run_if: passed
 
       - qa:
@@ -34,7 +34,7 @@ pipelines:
                 - exec:
                     command: echo
                     arguments:
-                      "Deploying to QA env"
+                      - "Deploying to QA env"
                     run_if: passed
 
       - uat:
@@ -48,7 +48,7 @@ pipelines:
                 - exec:
                     command: echo
                     arguments:
-                      "Deploying to UAT env"
+                      - "Deploying to UAT env"
                     run_if: passed
 
       - prod:
@@ -62,6 +62,6 @@ pipelines:
                 - exec:
                     command: echo D
                     arguments:
-                      "Deploying to Prod env"
+                      - "Deploying to Prod env"
                     run_if: passed
 
