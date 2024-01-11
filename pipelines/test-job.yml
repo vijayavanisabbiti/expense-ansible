@@ -61,7 +61,7 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: echo D
+                    command: echo
                     arguments:
                       - "Deploying to Prod env"
                     run_if: passed
