@@ -10,6 +10,7 @@ aws ec2 describe-instances --filters "Name=tag:Name,Values=${ENV}-${COMPONENT}" 
 
 # Change the Parameter store having the app version.
 aws ssm put-parameter --name "${ENV}.${COMPONENT}.app_version" --value "${APP_VERSION}" --type "String" --overwrite
+
 SSH_PASSWORD=$(aws ssm get-parameter --name "ssh.password" --with-decryption --query 'Parameter.Value' --output text)
 
 #Run ansible playbook push on the server
