@@ -4,7 +4,6 @@ pipelines:
     group: defaultGroup
     environment_variables:
       APP_VERSION: ""
-      COMPONENT: backend
     materials:
       deploy:
         git: https://github.com/vijayavanisabbiti/expense-ansible
@@ -14,7 +13,7 @@ pipelines:
 
     stages:
       - dev:
-          fetch_materials: false
+          fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
           environment_variables:
@@ -26,13 +25,13 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: bash
+                    command: echo
                     arguments:
-                      - mutable.sh
+                      - "Deploying to Dev env"
                     run_if: passed
 
       - qa:
-          fetch_materials: false
+          fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
           approval:
@@ -48,7 +47,7 @@ pipelines:
                     run_if: passed
 
       - uat:
-          fetch_materials: false
+          fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
           approval:
@@ -64,7 +63,7 @@ pipelines:
                     run_if: passed
 
       - prod:
-          fetch_materials: false
+          fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
           approval:
@@ -78,9 +77,9 @@ pipelines:
               timeout: 0
               tasks:
                 - exec:
-                    command: bash
+                    command: echo
                     arguments:
-                      - mutable.sh
+                      - "Deploying to Prod env"
                     run_if: passed
 
 
