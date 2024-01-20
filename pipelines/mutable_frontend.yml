@@ -4,6 +4,7 @@ pipelines:
     group: defaultGroup
     environment_variables:
       APP_VERSION: ""
+      COMPONENT: frontend
     materials:
       deploy:
         git: https://github.com/vijayavanisabbiti/expense-ansible
@@ -16,6 +17,8 @@ pipelines:
           fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
+          environment_variables:
+            ENV: dev
           jobs:
             deploy:
               timeout: 0
@@ -62,6 +65,8 @@ pipelines:
           fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
+          environment_variables:
+            ENV: prod
           approval:
             type: manual
           jobs:
